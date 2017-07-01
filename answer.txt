@@ -1,0 +1,23 @@
+
+Q1) Recipients: Which 3 recipients received the largest number of direct emails (emails that have exactly one recipient),
+and how many did each receive?
+
++-------------------+-----+
+|to[0]              |count|
++-------------------+-----+
+|Maureen McVicker   |111  |
+|'vkaminski@aol.com'|42   |
+|Jeff Dasovich      |20   |
++-------------------+-----+
+
+Q2) Senders: Which 3 senders sent the largest number of broadcast emails (emails that have multiple recipients,
+including CCs and BCCs), and how many did each send?
+
++-----------------------------------------------------------+-----+
+|from                                                       |count|
++-----------------------------------------------------------+-----+
+|Steven J Kean                                              |252  |
+|Kaminski, Vince J </O=ENRON/OU=NA/CN=RECIPIENTS/CN=VKAMINS>|90   |
+|Shelk, John </O=ENRON/OU=NA/CN=RECIPIENTS/CN=JSHELK>       |57   |
++-----------------------------------------------------------+-----+
+

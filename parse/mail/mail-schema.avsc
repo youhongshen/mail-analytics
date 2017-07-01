@@ -16,6 +16,10 @@
       "type": "float"
     },
     {
+      "name": "file",
+      "type": "string"
+    },
+    {
       "name": "to",
       "type": {
         "type": "array",
@@ -26,14 +30,8 @@
       }
     },
     {
-      "name": "cc",
-      "type": {
-        "type": "array",
-        "items": {
-          "name": "recipient",
-          "type": "string"
-        }
-      }
+      "name": "to_count",
+      "type": "int"
     }
   ]
 }

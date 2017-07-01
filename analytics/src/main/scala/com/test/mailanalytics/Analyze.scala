@@ -1,10 +1,8 @@
 package com.test.mailanalytics
 
-import org.apache.spark.sql.SparkSession
+import org.apache.spark.sql.{Row, SparkSession}
 import com.databricks.spark.avro._
 import org.apache.spark.sql.functions._
-//import sqlContext.implicits._
-//import org.apache.spark.sql.SQLContext.implicts._
 
 /**
   * Created by joan on 6/30/17.
@@ -12,8 +10,6 @@ import org.apache.spark.sql.functions._
 object Analyze {
 
   def main(args: Array[String]): Unit = {
-//    val conf = new SparkConf().setAppName("enron mail analytics").setMaster("local")
-//    val sc = new SparkContext(conf)
 
     val spark = SparkSession
       .builder()
@@ -21,13 +17,16 @@ object Analyze {
       .master("local")
       .getOrCreate()
 
-//    todo - how to make the schema to enforce fields to be non nullable
+//    to use the $ notation
+    import spark.implicits._
+
     val df = spark.read.avro("/tmp/emails.avro")
-//    df.printSchema()
-//    df.show()
-//    df.select("from", "date").show()
-    df.groupBy("from").count().orderBy(desc("count")).show()
-//    df.filter("to equal 'Peter Styles'").show()
-//    df.filter(col("to")).equal("Peter Styles'")
+    df.printSchema()
+
+//    q1 - 3 recipients who received the most direct emails
+    df.filter($"to_count" === 1).groupBy($"to"(0)).count().orderBy(desc("count")).show(3, false)
+
+//    q2 - 3 senders who sent the most number of broadcast emails
+    df.filter($"to_count" > 1).groupBy("from").count().orderBy(desc("count")).show(3, false)
   }
 }

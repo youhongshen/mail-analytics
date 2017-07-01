@@ -24,14 +24,17 @@ def parse_mail(files):
 
         email = dict()
         email['from'] = msg['X-From']
-        email['to'] = [x.strip() for x in msg['X-To'].split(',')]
+        to = [x.strip() for x in msg['X-To'].split(',') if x != '']
         cc = [x.strip() for x in msg['X-cc'].split(',') if x != '']
         bcc = [x.strip() for x in msg['X-bcc'].split(',') if x != '']
-        email['cc'] = cc + bcc
+        email['to'] = to + cc + bcc
+        email['to_count'] = len(email['to'])
         email['subject'] = msg['Subject'].replace('\n', ' ')
         # todo - the parsing did not get the timezone
         d = parse_date(msg['Date'])
         email['date'] = time.mktime(d.timetuple())
+        f = file.split('/')
+        email['file'] = '/'.join(str(x) for x in f[-2:])    # '1/12332.txt'
 
         emails.append(email)
 
@@ -71,4 +74,4 @@ if __name__ == '__main__':
     files = get_files(dir_prefix)
     emails = parse_mail(files)
     write_to_avro(avro_schema, emails)
-    read_from_avro()
+    # read_from_avro()
