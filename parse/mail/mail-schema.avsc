@@ -1,0 +1,39 @@
+{
+  "namespace": "enron.mail",
+  "type": "record",
+  "name": "email",
+  "fields": [
+    {
+      "name": "from",
+      "type": "string"
+    },
+    {
+      "name": "subject",
+      "type": "string"
+    },
+    {
+      "name": "date",
+      "type": "float"
+    },
+    {
+      "name": "to",
+      "type": {
+        "type": "array",
+        "items": {
+          "name": "recipient",
+          "type": "string"
+        }
+      }
+    },
+    {
+      "name": "cc",
+      "type": {
+        "type": "array",
+        "items": {
+          "name": "recipient",
+          "type": "string"
+        }
+      }
+    }
+  ]
+}
