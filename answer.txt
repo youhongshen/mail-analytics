@@ -21,3 +21,18 @@ including CCs and BCCs), and how many did each send?
 |Shelk, John </O=ENRON/OU=NA/CN=RECIPIENTS/CN=JSHELK>       |57   |
 +-----------------------------------------------------------+-----+
 
+Q3) Response times: Find the five emails with the fastest response times. Please include file IDs, subject, sender,
+recipient, and response time. (For our purposes, a response is defined as a message from one of the recipients to the
+original sender whose subject line contains the subject of the original email as a substring, and the response time
+should be measured as the difference between when the original email was sent and when the response was sent.)
+
++------------+-------------+-------------+-------------+---------+--------------------------------------------------------------------------------------+
+|orig_email  |replied_email|from         |recipient    |resp_time|subject                                                                               |
++------------+-------------+-------------+-------------+---------+--------------------------------------------------------------------------------------+
+|1/121747.txt|3/121748.txt |Karen Denne  |Jeff Dasovich|240      |Re: CONFIDENTIAL - Residential in CA                                                  |
+|4/122923.txt|3/122926.txt |Paul Kaufman |Jeff Dasovich|240      |RE: Eeegads...                                                                        |
+|1/221669.txt|1/199911.txt |Thane Twiggs |Dana Davis   |360      |ISO-NE failure to mitigate ICAP market -- Release of ISO NE   confidential information|
+|3/121748.txt|1/121749.txt |Jeff Dasovich|Karen Denne  |660      |Re: CONFIDENTIAL - Residential in CA                                                  |
+|3/122913.txt|4/122923.txt |Jeff Dasovich|Paul Kaufman |3000     |Eeegads...                                                                            |
++------------+-------------+-------------+-------------+---------+--------------------------------------------------------------------------------------+
+only showing top 5 rows

@@ -12,8 +12,12 @@
       "type": "string"
     },
     {
+      "name": "proc_subj",
+      "type": "string"
+    },
+    {
       "name": "date",
-      "type": "float"
+      "type": "int"
     },
     {
       "name": "file",

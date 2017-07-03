@@ -5,6 +5,7 @@ from avro.datafile import DataFileWriter, DataFileReader
 from avro.io import DatumWriter, DatumReader
 from dateutil.parser import parse as parse_date
 from email.parser import HeaderParser
+import re
 
 from os import listdir
 
@@ -14,25 +15,29 @@ from os.path import join, isfile, isdir
 def parse_mail(files):
     parser = HeaderParser()
     emails = []
+
     for file in files:
         with open(file, "r") as f:
             msg = parser.parse(f)
-        # print(msg.keys())
-        # print(file)
-        # print(msg.is_multipart())
-        # print('%s %s' % (msg['Subject'], file))
 
         email = dict()
-        email['from'] = msg['X-From']
+        email['from'] = msg['X-From']       # could be '', but not null
         to = [x.strip() for x in msg['X-To'].split(',') if x != '']
         cc = [x.strip() for x in msg['X-cc'].split(',') if x != '']
         bcc = [x.strip() for x in msg['X-bcc'].split(',') if x != '']
-        email['to'] = to + cc + bcc
-        email['to_count'] = len(email['to'])
-        email['subject'] = msg['Subject'].replace('\n', ' ')
+        email['to'] = to + cc + bcc         # could be an empty list, but not null
+        email['to_count'] = len(email['to'])        # num of recipients in the distribution list
+        subject = re.sub(r'\n|\r|\t|\s+', ' ', msg['Subject']).rstrip()
+        subject = re.sub(r'^\s+', '', subject)
+        # remove the fw: or re: so we can do groupBy(subject) to aggregate by subject
+        processed_subject = re.sub(r'^fw:\s*|^re:\s*', '', subject, flags=re.IGNORECASE)
+
+        email['subject'] = subject
+        email['proc_subj'] = processed_subject
+
         # todo - the parsing did not get the timezone
         d = parse_date(msg['Date'])
-        email['date'] = time.mktime(d.timetuple())
+        email['date'] = int(time.mktime(d.timetuple()))     # convert to unix time
         f = file.split('/')
         email['file'] = '/'.join(str(x) for x in f[-2:])    # '1/12332.txt'
 
