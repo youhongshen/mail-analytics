@@ -68,8 +68,14 @@ object Analyze {
         coalesce(lead($"subject", 1).over(Window.partitionBy($"proc_subj").orderBy($"date"))).as("next_subj")
       )
       .filter(inArray($"next_to", $"from") && inArray($"to", $"next_from") && isSubString($"subject", $"next_subj"))
-      .select($"file".as("orig_email"), $"next_file".as("replied_email"), $"from", $"next_from".as("recipient"),
-        ($"next_date" - $"date").cast("int").as("resp_time"), $"subject")
+      .select(
+        $"file".as("orig_email"),
+        $"next_file".as("replied_email"),
+        $"from".as("sender"),
+        $"next_from".as("recipient"),
+        ($"next_date" - $"date").cast("int").as("resp_time"),
+        $"subject"
+      )
       .orderBy($"resp_time")
   }
 }

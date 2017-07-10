@@ -39,7 +39,7 @@ Disadvantage:
 
 ## Design decision - analytics 
 
-Spark is a fast (compared to Hadoop MapReduce) processing engine for clustered computing, allowing the solution to be 
+Spark is a fast processing engine for clustered computing, allowing the solution to be 
 scaled to a larger dataset.  And since our intermediate data is structured with a schema, SparkSQL is chosen to take 
 advantage of the SQL like querying power it offers.  SparkSQL also offers user defined functions which came in handy 
 in the more complicated query for finding the response time.
@@ -48,7 +48,7 @@ in the more complicated query for finding the response time.
 
 - Parsing - Avro supports different languages.  Python is chosen for its built in email parser and its ease of use in 
 terms of data manipulation.
-- Analytics - Scala is chosen since we use Spark for this component and Scala is the native language for Spark.
+- Analytics - Scala is chosen because Spark is used for this component and Scala is the native language for Spark.
 
 # Assumptions of the data
 
