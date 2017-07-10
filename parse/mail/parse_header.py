@@ -74,7 +74,7 @@ def read_from_avro(avro_file="/tmp/emails.avro"):
 
 
 if __name__ == '__main__':
-    dir_prefix = "/home/joan/IdeaProjects/mail-analytics/parse/enron_with_categories/"
+    dir_prefix = "/home/joan/IdeaProjects/mail-analytics/enron_with_categories/"
     avro_schema = "/home/joan/IdeaProjects/mail-analytics/parse/mail/mail-schema.avsc"
     files = get_files(dir_prefix)
     emails = parse_mail(files)
